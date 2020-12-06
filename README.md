@@ -14,8 +14,11 @@ Android CMake以及NDK实践基础 https://www.imooc.com/learn/1212
 
 **学习本节课程遇到的其它问题**
 
-**问题：**LOGD只能在native-lib.cpp才能打印出日志,而在其他.cpp文件中就会报错: error: undefined reference to '__android_log_print'
+**问题：** 
+
+&emsp;&emsp;LOGD只能在native-lib.cpp才能打印出日志,而在其他.cpp文件中就会报错: error: undefined reference to '__android_log_print'
 
 **解决方案：**
+
 &emsp;&emsp;在 CMakeLists.txt 文件中新建一个 target_link_libraries 函数，将log日志库与其它 .cpp 编译的 lib 动态库链接。 
 &emsp;&emsp;target_link_libraries 内部也会受到排列顺序的影响，将其它 .cpp 文件编译的动态库名字放在第一个，就可以正常打印 log，但是有可能会导致其它库中 .cpp 运行时出现 undefined reference 错误。
