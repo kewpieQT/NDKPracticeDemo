@@ -22,3 +22,22 @@ Android CMake以及NDK实践基础 https://www.imooc.com/learn/1212
 
 &emsp;&emsp;在 CMakeLists.txt 文件中新建一个 target_link_libraries 函数，将log日志库与其它 .cpp 编译的 lib 动态库链接。 
 &emsp;&emsp;target_link_libraries 内部也会受到排列顺序的影响，将其它 .cpp 文件编译的动态库名字放在第一个，就可以正常打印 log，但是有可能会导致其它库中 .cpp 运行时出现 undefined reference 错误。
+
+### 2-3 JNI 中基础数据类型转换
+
+* JNI 中基础类型的定义
+* Java 与 JNI 中的基础数据类型转换实践
+
+Java 与 JNI 中的基础数据类型基本都是一致的，下面代码是给 C/C++ 中的基础数据类型定义一个与 Java 中的基础数据类型相对应的别名，便于理解使用。（别名去掉 "j" 就是 Java 中的基础数据类型了）
+
+
+```
+typedef uint8_t  jboolean; /* unsigned 8 bits */
+typedef int8_t   jbyte;    /* signed 8 bits */
+typedef uint16_t jchar;    /* unsigned 16 bits */
+typedef int16_t  jshort;   /* signed 16 bits */
+typedef int32_t  jint;     /* signed 32 bits */
+typedef int64_t  jlong;    /* signed 64 bits */
+typedef float    jfloat;   /* 32-bit IEEE 754 */
+typedef double   jdouble;  /* 64-bit IEEE 754 */
+```
