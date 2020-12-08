@@ -4,6 +4,12 @@
 
 #include "people.h"
 
-std::string people::getString(){
+std::string people::getString() {
     return "this is from people";
 }
+
+std::string people::getStringFromCStyle(const char *str) {
+    std::string s(str);
+    return s;
+}
+

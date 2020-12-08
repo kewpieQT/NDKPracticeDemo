@@ -3,6 +3,7 @@ package com.kewpie.nativepractice
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.kewpie.nativepractice.jni.JNIBasicType
+import com.kewpie.nativepractice.jni.JNIString
 import com.kewpie.nativepractice.load.JNIDynamicLoad
 import com.kewpie.nativepractice.utils.LogUtil
 import kotlinx.android.synthetic.main.activity_main.*
@@ -14,6 +15,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // Example of a call to a native method
 //        sample_text.text = stringFromJNI()
+
+        chapter2_4()
+    }
+
+    fun chapter2_4(){
+        var jniString = JNIString()
+        sample_text.setOnClickListener {
+            LogUtil.i(jniString.callNativeString("java string"))
+            jniString.stringMethod("java string")
+        }
+    }
+    fun chapter2_3() {
         var jniBasicType = JNIBasicType()
         sample_text.setOnClickListener {
             LogUtil.i("java show " + jniBasicType.callNativeInt(3))

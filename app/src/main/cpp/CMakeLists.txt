@@ -20,13 +20,6 @@ add_library(people-lib
         ${CMAKE_SOURCE_DIR}/people/people.cpp
         )
 
-add_library(dynamic-lib
-
-        SHARED
-
-        ${CMAKE_SOURCE_DIR}/jni/jni_dynamic_load.cpp
-        ${CMAKE_SOURCE_DIR}/base/jvm.cpp)
-
 
 add_library( # Sets the name of the library.
         native-lib
@@ -35,7 +28,10 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        ${CMAKE_SOURCE_DIR}/native-lib.cpp)
+        ${CMAKE_SOURCE_DIR}/jni/jni_dynamic_load.cpp
+        ${CMAKE_SOURCE_DIR}/base/jvm.cpp
+        ${CMAKE_SOURCE_DIR}/native-lib.cpp
+        ${CMAKE_SOURCE_DIR}/jni/jni_string.cpp)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -60,12 +56,6 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/people/)
 target_link_libraries( # Specifies the target library.
         native-lib
         people-lib
-        # Links the target library to the log library
-        # included in the NDK.
-        ${log-lib})
-
-target_link_libraries( # Specifies the target library.
-        dynamic-lib
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})

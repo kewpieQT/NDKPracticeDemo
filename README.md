@@ -41,3 +41,12 @@ typedef int64_t  jlong;    /* signed 64 bits */
 typedef float    jfloat;   /* 32-bit IEEE 754 */
 typedef double   jdouble;  /* 64-bit IEEE 754 */
 ```
+
+### 2-4 JNI 中字符串类型转换
+（对应代码：src/main/cpp/jni/jni_string.cpp）
+
+* JNI 中字符串类型的定义
+* Java 中的字符串与 JNI 中字符串的转换调用实践
+* JNI 中字符串操作的必备函数
+
+Java 的字符串不能直接转成 C/C++ 风格的字符串，需要用到 GetStringChars 或者 GetStringUTFChars 相应的函数来转换，使用完毕后记得释放该指针的内存。（具体的相关操作请在代码中查看）

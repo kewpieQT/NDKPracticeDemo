@@ -10,6 +10,7 @@
 class people {
 public:
     std::string getString();
+    std::string getStringFromCStyle(const char*);
 };
 
 
