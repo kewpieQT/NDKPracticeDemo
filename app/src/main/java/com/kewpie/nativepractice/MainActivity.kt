@@ -3,6 +3,7 @@ package com.kewpie.nativepractice
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.kewpie.nativepractice.jni.JNIBasicType
+import com.kewpie.nativepractice.jni.JNIReferenceType
 import com.kewpie.nativepractice.jni.JNIString
 import com.kewpie.nativepractice.load.JNIDynamicLoad
 import com.kewpie.nativepractice.utils.LogUtil
@@ -16,9 +17,17 @@ class MainActivity : AppCompatActivity() {
         // Example of a call to a native method
 //        sample_text.text = stringFromJNI()
 
-        chapter2_4()
+        chapter2_5()
     }
 
+    var strings = arrayOf("apple","pear","banana");
+
+    fun chapter2_5(){
+        var jniReferenceType = JNIReferenceType()
+        sample_text.setOnClickListener {
+            LogUtil.i("array item is "+jniReferenceType.callNativeStringArray(strings))
+        }
+    }
     fun chapter2_4(){
         var jniString = JNIString()
         sample_text.setOnClickListener {

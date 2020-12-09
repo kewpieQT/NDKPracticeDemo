@@ -21,6 +21,11 @@ add_library(people-lib
         )
 
 
+aux_source_directory(. SOURCE_FILES)
+aux_source_directory(./jni JNI_SOURCE_FILES)
+
+list(APPEND SOURCE_FILES ${JNI_SOURCE_FILES})
+
 add_library( # Sets the name of the library.
         native-lib
 
@@ -28,10 +33,7 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        ${CMAKE_SOURCE_DIR}/jni/jni_dynamic_load.cpp
-        ${CMAKE_SOURCE_DIR}/base/jvm.cpp
-        ${CMAKE_SOURCE_DIR}/native-lib.cpp
-        ${CMAKE_SOURCE_DIR}/jni/jni_string.cpp)
+       ${SOURCE_FILES})
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by

@@ -50,3 +50,33 @@ typedef double   jdouble;  /* 64-bit IEEE 754 */
 * JNI 中字符串操作的必备函数
 
 Java 的字符串不能直接转成 C/C++ 风格的字符串，需要用到 GetStringChars 或者 GetStringUTFChars 相应的函数来转换，使用完毕后记得释放该指针的内存。（具体的相关操作请在代码中查看）
+
+### 2-5 JNI 中引用类型转换 
+（对应代码：src/main/cpp/jni/jni_reference_type.cpp）
+
+* JNI 中引用类型的定义
+* Java 中引用类型与 JNI 中引用类型的转换调用实践
+
+其它知识点：
+
+
+```
+//获取目录中所有源文件的地址保存在 SOURCE_FILES 中。
+aux_source_directory(. SOURCE_FILES)
+aux_source_directory(./jni JNI_SOURCE_FILES)
+
+//将 JNI_SOURCE_FILES 地址列表添加到 SOURCE_FILES 中
+list(APPEND SOURCE_FILES ${JNI_SOURCE_FILES})
+
+add_library( # Sets the name of the library.
+        native-lib
+
+        # Sets the library as a shared library.
+        SHARED
+
+        # Provides a relative path to your source file(s).
+        
+        //提供需要编译的源文件地址
+        //使用这种方式添加，避免了每次新建 .cpp 文件时，都需要手动添加该文件
+       ${SOURCE_FILES})
+```
