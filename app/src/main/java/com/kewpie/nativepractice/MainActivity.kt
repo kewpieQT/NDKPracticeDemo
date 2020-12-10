@@ -2,6 +2,8 @@ package com.kewpie.nativepractice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.kewpie.nativepractice.base.Animal
+import com.kewpie.nativepractice.jni.JNIAccessField
 import com.kewpie.nativepractice.jni.JNIBasicType
 import com.kewpie.nativepractice.jni.JNIReferenceType
 import com.kewpie.nativepractice.jni.JNIString
@@ -17,24 +19,41 @@ class MainActivity : AppCompatActivity() {
         // Example of a call to a native method
 //        sample_text.text = stringFromJNI()
 
-        chapter2_5()
+        chapter2_6()
     }
 
-    var strings = arrayOf("apple","pear","banana");
-
-    fun chapter2_5(){
-        var jniReferenceType = JNIReferenceType()
+    fun chapter2_6() {
+        val jniAccessField = JNIAccessField()
+        val animal = Animal("dog")
         sample_text.setOnClickListener {
-            LogUtil.i("array item is "+jniReferenceType.callNativeStringArray(strings))
+            jniAccessField.accessStaticField(animal)
+            jniAccessField.accessInstanceField(animal)
+
+            JNIAccessField.staticAccessInstanceField()
+
+            LogUtil.i("name is " + animal.name)
+            LogUtil.i("num is " + Animal.num)
+            LogUtil.i("static num is "+JNIAccessField.num)
         }
     }
-    fun chapter2_4(){
+
+    var strings = arrayOf("apple", "pear", "banana");
+
+    fun chapter2_5() {
+        var jniReferenceType = JNIReferenceType()
+        sample_text.setOnClickListener {
+            LogUtil.i("array item is " + jniReferenceType.callNativeStringArray(strings))
+        }
+    }
+
+    fun chapter2_4() {
         var jniString = JNIString()
         sample_text.setOnClickListener {
             LogUtil.i(jniString.callNativeString("java string"))
             jniString.stringMethod("java string")
         }
     }
+
     fun chapter2_3() {
         var jniBasicType = JNIBasicType()
         sample_text.setOnClickListener {

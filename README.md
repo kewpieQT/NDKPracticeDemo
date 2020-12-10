@@ -80,3 +80,10 @@ add_library( # Sets the name of the library.
         //使用这种方式添加，避免了每次新建 .cpp 文件时，都需要手动添加该文件
        ${SOURCE_FILES})
 ```
+### 2-6 JNI 访问 Java 类字段
+（对应代码：src/main/cpp/jni/jni_access_field.cpp）
+
+* 通过 JNI 去访问 Java 类中的字段
+* 访问并修改类实例的字段
+* 访问并修改类的静态字段
+
