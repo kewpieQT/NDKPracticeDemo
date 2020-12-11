@@ -3,10 +3,7 @@ package com.kewpie.nativepractice
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.kewpie.nativepractice.base.Animal
-import com.kewpie.nativepractice.jni.JNIAccessField
-import com.kewpie.nativepractice.jni.JNIBasicType
-import com.kewpie.nativepractice.jni.JNIReferenceType
-import com.kewpie.nativepractice.jni.JNIString
+import com.kewpie.nativepractice.jni.*
 import com.kewpie.nativepractice.load.JNIDynamicLoad
 import com.kewpie.nativepractice.utils.LogUtil
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,7 +16,16 @@ class MainActivity : AppCompatActivity() {
         // Example of a call to a native method
 //        sample_text.text = stringFromJNI()
 
-        chapter2_6()
+        chapter2_7()
+    }
+
+    fun chapter2_7(){
+        val animal = Animal("dog")
+        val jniAccessMethod = JNIAccessMethod()
+        sample_text.setOnClickListener {
+            jniAccessMethod.accessInstanceMethod(animal)
+            jniAccessMethod.accessStaticMethod(animal)
+        }
     }
 
     fun chapter2_6() {

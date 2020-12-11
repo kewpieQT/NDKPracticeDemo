@@ -87,3 +87,10 @@ add_library( # Sets the name of the library.
 * 访问并修改类实例的字段
 * 访问并修改类的静态字段
 
+### 2-7 JNI 访问 Java 类方法
+（对应代码：src/main/cpp/jni/jni_access_method.cpp）
+
+* 通过 JNI 去访问 Java 类中的方法
+* 访问 Java 类实例的方法
+* 访问 Java 类的静态方法
+
