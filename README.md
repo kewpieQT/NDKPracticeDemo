@@ -93,4 +93,18 @@ add_library( # Sets the name of the library.
 * 通过 JNI 去访问 Java 类中的方法
 * 访问 Java 类实例的方法
 * 访问 Java 类的静态方法
+
+### 2-8 JNI 回调 Java 方法
+（对应代码：src/main/cpp/jni/jni_invoke_method.cpp）
+
+* JNI 函数内回调 Java 方法
+* JNI 函数通过接口参数回调 Java 方法
+* JNI 子线程如何回调 Java 的主线程方法
+
+1、2 个函数操作步骤与 2-7 一致。
+
+JNI 子线程如何回调 Java 的主线程方法（知识点与注意事项）：
+1. Java 调用 Native 方法时所传递的 env 参数无法跨线程使用。
+2. 可以在 JNI_OnLoad 方法中保存 static jvm 指针，在子线程中通过 jvm->AttachCurrentThread() 方法获取当前子线程的 env 指针。
+3. 最后调用 Java 函数的步骤同上（切记调用 jvm->DetachCurrentThread() 方法）。
  

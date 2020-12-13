@@ -16,7 +16,20 @@ class MainActivity : AppCompatActivity() {
         // Example of a call to a native method
 //        sample_text.text = stringFromJNI()
 
-        chapter2_7()
+        chapter2_8()
+    }
+
+    fun chapter2_8(){
+        val jniInvokeMethod = JNIInvokeMethod();
+        sample_text.setOnClickListener {
+            jniInvokeMethod.nativeCallback {
+                LogUtil.i("thread name is "+ Thread.currentThread().name)
+            }
+
+            jniInvokeMethod.nativeThreadCallback {
+                LogUtil.i("thread name is "+Thread.currentThread().name)
+            }
+        }
     }
 
     fun chapter2_7(){

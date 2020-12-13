@@ -23,8 +23,9 @@ add_library(people-lib
 
 aux_source_directory(. SOURCE_FILES)
 aux_source_directory(./jni JNI_SOURCE_FILES)
+aux_source_directory(./base BASE_SOURCE_FILES)
 
-list(APPEND SOURCE_FILES ${JNI_SOURCE_FILES})
+list(APPEND SOURCE_FILES ${JNI_SOURCE_FILES} ${BASE_SOURCE_FILES})
 
 add_library( # Sets the name of the library.
         native-lib

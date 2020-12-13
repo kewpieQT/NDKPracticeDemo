@@ -32,6 +32,8 @@ JNIEXPORT int JNICALL JNI_OnLoad(JavaVM *vm, void *reserved){
         return JNI_FALSE;
     }
 
+    setJvm(vm);
+
     //把我们的C方法动态注册到系统中去
     //当JAVA层调用Native方法时，就不用根据包名、函数名、形参列表去一个个匹配方法
     //而是可以直接在系统中调用对应的方法，提高我们软件运行的速度。
