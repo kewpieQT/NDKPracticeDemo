@@ -94,7 +94,7 @@ add_library( # Sets the name of the library.
 * 访问 Java 类实例的方法
 * 访问 Java 类的静态方法
 
-### 2-8 JNI 回调 Java 方法
+### 2-8 JNI 子线程回调 Java 方法
 （对应代码：src/main/cpp/jni/jni_invoke_method.cpp）
 
 * JNI 函数内回调 Java 方法
