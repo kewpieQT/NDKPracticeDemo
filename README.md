@@ -106,5 +106,4 @@ add_library( # Sets the name of the library.
 JNI 子线程如何回调 Java 的主线程方法（知识点与注意事项）：
 1. Java 调用 Native 方法时所传递的 env 参数无法跨线程使用。
 2. 可以在 JNI_OnLoad 方法中保存 static jvm 指针，在子线程中通过 jvm->AttachCurrentThread() 方法获取当前子线程的 env 指针。
-3. 最后调用 Java 函数的步骤同上（切记调用 jvm->DetachCurrentThread() 方法）。
- 
+3. 最后调用 Java 函数的步骤同上（切记调用 jvm->DetachCurrentThread() 方法）。  
