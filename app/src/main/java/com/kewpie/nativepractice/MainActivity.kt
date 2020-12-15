@@ -16,7 +16,29 @@ class MainActivity : AppCompatActivity() {
         // Example of a call to a native method
 //        sample_text.text = stringFromJNI()
 
-        chapter2_8()
+        chapter3_1()
+    }
+
+    fun chapter3_1(){
+        val jniReference = JNIReference();
+        sample_text.setOnClickListener {
+            LogUtil.i(jniReference.errorCacheLocalReference())
+
+            LogUtil.i( jniReference.cacheWithGlobalReference())
+
+            jniReference.useWeakGlobalReference()
+        }
+    }
+
+    fun chapter2_9(){
+        val jniConstructorClass = JNIConstructorClass();
+        sample_text.setOnClickListener {
+          var animal =  jniConstructorClass.invokeAnimalConstructors()
+            LogUtil.i("invoke animal name is "+animal.name)
+
+           var allocAnimal =  jniConstructorClass.allocObjectConstructor()
+            LogUtil.i("alloc animal name is "+allocAnimal.name)
+        }
     }
 
     fun chapter2_8(){

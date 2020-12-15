@@ -106,4 +106,23 @@ add_library( # Sets the name of the library.
 JNI 子线程如何回调 Java 的主线程方法（知识点与注意事项）：
 1. Java 调用 Native 方法时所传递的 env 参数无法跨线程使用。
 2. 可以在 JNI_OnLoad 方法中保存 static jvm 指针，在子线程中通过 jvm->AttachCurrentThread() 方法获取当前子线程的 env 指针。
-3. 最后调用 Java 函数的步骤同上（切记调用 jvm->DetachCurrentThread() 方法）。  
+3. 最后调用 Java 函数的步骤同上（切记调用 jvm->DetachCurrentThread() 方法）。 
+
+### 2-9 JNI 创建 Java 类
+（对应代码：src/main/cpp/jni/jni_constructor_class.cpp）
+
+* JNI 调用类的构造方法创建类实例
+* 两种不同的实现方式(NewObject、AllocObject)
+
+共同点：两个方法都是用于构建一个新的类对象。
+不同点：AllocObject 仅仅构建一个新的类对象（仅仅为类的对象分配内存空间），不初始化成员变量，也不调用构造函数。
+
+NewObject 需要指明调用的构造方法，构建一个新的对象，并初始化成员变量。
+
+### 3-1 JNI 引用类型管理
+（对应代码：src/main/cpp/jni/jni_reference.cpp）
+* 全局引用(NewGlobalRef)
+* 局部引用(NewLocalRef)
+* 弱引用(NewWeakGlobalRef)
+
+局部引用在使用完成之后，需要及时释放引用(DeleteLocalRef)，避免因局部引用变多导致内存溢出，尤其是在循环体中创建局部引用。

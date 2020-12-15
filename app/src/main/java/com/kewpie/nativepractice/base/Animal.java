@@ -3,9 +3,10 @@ package com.kewpie.nativepractice.base;
 import com.kewpie.nativepractice.utils.LogUtil;
 
 public class Animal {
-    protected String name;
+    protected String name = "duck";
 
     public static int num = 0;
+    public Animal(){}
 
     public Animal(String name){this.name = name;}
 
