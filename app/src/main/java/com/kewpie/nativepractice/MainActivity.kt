@@ -7,6 +7,7 @@ import com.kewpie.nativepractice.jni.*
 import com.kewpie.nativepractice.load.JNIDynamicLoad
 import com.kewpie.nativepractice.utils.LogUtil
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.IllegalArgumentException
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,7 +17,20 @@ class MainActivity : AppCompatActivity() {
         // Example of a call to a native method
 //        sample_text.text = stringFromJNI()
 
-        chapter3_1()
+        chapter3_2()
+    }
+
+    fun chapter3_2(){
+        val jniException = JNIException();
+        sample_text.setOnClickListener {
+            try {
+                jniException.nativeThrowException()
+            }catch (e:IllegalArgumentException){
+                LogUtil.e(e.message?:"");
+            }
+
+            jniException.nativeInvokeJavaException()
+        }
     }
 
     fun chapter3_1(){
