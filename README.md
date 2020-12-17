@@ -4,7 +4,7 @@ Android CMake以及NDK实践基础 https://www.imooc.com/learn/1212
 ## Java 与 JNI 的交互
 ### 2-2 函数的动态注册
 **优点：**
-未使用动态注册时，调用 native 方法，会根据包名、类名、函数名、形参列表去 C 层寻找匹配的函数。
+未使用动态注册时，调用 native 方法，会根据包名、类名、函数名、形参列表去 native 层寻找匹配的函数。
 使用动态注册后，可以省去查找匹配的时间，提高程序的运行效率。
 
 **动态注册的实现关键 ：JNI_OnLoad 函数**
@@ -20,8 +20,9 @@ Android CMake以及NDK实践基础 https://www.imooc.com/learn/1212
 
 **解决方案：**
 
-&emsp;&emsp;在 CMakeLists.txt 文件中新建一个 target_link_libraries 函数，将log日志库与其它 .cpp 编译的 lib 动态库链接。 
-&emsp;&emsp;target_link_libraries 内部也会受到排列顺序的影响，将其它 .cpp 文件编译的动态库名字放在第一个，就可以正常打印 log，但是有可能会导致其它库中 .cpp 运行时出现 undefined reference 错误。
+&emsp;&emsp;在 CMakeLists.txt 文件中新建一个 target_link_libraries 函数，将log日志库与待编译的目标库链接。 
+&emsp;&emsp;target_link_libraries 内部会受到排列顺序的影响，放在第一个的是等待编译的目标库，其它的是依赖库。
+~~将其它 .cpp 文件编译的动态库名字放在第一个，就可以正常打印 log，但是有可能会导致其它库中 .cpp 运行时出现 undefined reference 错误。~~
 
 ### 2-3 JNI 中基础数据类型转换
 

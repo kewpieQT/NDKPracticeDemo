@@ -58,9 +58,9 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/people/)
 
 target_link_libraries( # Specifies the target library.
         native-lib
-        people-lib
         # Links the target library to the log library
         # included in the NDK.
+        people-lib
         ${log-lib})
 
 
