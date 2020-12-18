@@ -150,5 +150,5 @@ jthrowable exc = env->ExceptionOccurred();
 //创建需要抛出的异常类型
 jclass cls = env->FindClass("java/lang/IllegalArgumentException");
 //使用 ThrowNew 抛出异常，交由上层处理
-env->ThrowNew(cls,"native throw exception"); 
+env->ThrowNew(cls,"native throw exception");  
 ```
