@@ -24,8 +24,9 @@ add_library(people-lib
 aux_source_directory(. SOURCE_FILES)
 aux_source_directory(./jni JNI_SOURCE_FILES)
 aux_source_directory(./base BASE_SOURCE_FILES)
+aux_source_directory(./thread THREAD_SOURCE_FILES)
 
-list(APPEND SOURCE_FILES ${JNI_SOURCE_FILES} ${BASE_SOURCE_FILES})
+list(APPEND SOURCE_FILES ${JNI_SOURCE_FILES} ${BASE_SOURCE_FILES} ${THREAD_SOURCE_FILES})
 
 add_library( # Sets the name of the library.
         native-lib
@@ -54,6 +55,7 @@ find_library( # Sets the name of the path variable.
 # build script, prebuilt third-party libraries, or system libraries.
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/base/)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/jni/)
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/thread/)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/people/)
 
 target_link_libraries( # Specifies the target library.

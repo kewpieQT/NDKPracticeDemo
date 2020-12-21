@@ -152,3 +152,7 @@ jclass cls = env->FindClass("java/lang/IllegalArgumentException");
 //使用 ThrowNew 抛出异常，交由上层处理
 env->ThrowNew(cls,"native throw exception");
 ```
+### 4-1 JNI 线程的创建
+* Posix API介绍以及线程库
+* 线程创建和销毁操作
+* 线程的同步操作
