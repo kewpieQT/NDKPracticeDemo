@@ -153,6 +153,26 @@ jclass cls = env->FindClass("java/lang/IllegalArgumentException");
 env->ThrowNew(cls,"native throw exception");
 ```
 ### 4-1 JNI 线程的创建
+（对应代码：src/main/cpp/thread/jni_thread.cpp）
+
 * Posix API介绍以及线程库
 * 线程创建和销毁操作
 * 线程的同步操作
+
+通过 pthread_create 创建线程。
+
+```
+int pthread_create(pthread_t* __pthread_ptr, pthread_attr_t const* __attr, void* (*__start_routine)(void*), void*);
+```
+
+四个参数按顺序分别为 「线程句柄」、「线程属性」、「线程执行函数」、「线程执行函数所需参数」。
+返回值为 0 表示线程创建成功，非 0 表示创建失败。
+
+销毁线程：
+线程需要在「线程执行函数」中显示的销毁线程，否则会导致程序崩溃。
+具体方法有：return 或 pthread_exit(0);
+
+线程通过 pthread_join 同步线程。
+```
+int pthread_join(pthread_t __pthread, void** __return_value_ptr);
+```
