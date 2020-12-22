@@ -176,3 +176,5 @@ int pthread_create(pthread_t* __pthread_ptr, pthread_attr_t const* __attr, void*
 ```
 int pthread_join(pthread_t __pthread, void** __return_value_ptr);
 ```
+
+当前线程等待__pthread 线程执行完成后才继续执行，通过__return_value_ptr 获取__pthread 「线程执行函数」的返回值。
