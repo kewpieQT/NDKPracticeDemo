@@ -198,6 +198,7 @@ int pthread_join(pthread_t __pthread, void** __return_value_ptr);
 
 #### 实践案例
 使用以上线程相关概念，实现一个简单的生产者消费者模型。（对应代码：src/main/cpp/thread/jni_product_and_consumer.cpp）
+
 创建一个生产者线程负责生产商品，创建一个消费者线程负责消费商品。
 
 如果商品数量大于9，视为爆仓不再生产商品。
