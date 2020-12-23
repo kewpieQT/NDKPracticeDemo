@@ -17,8 +17,23 @@ class MainActivity : AppCompatActivity() {
         // Example of a call to a native method
 //        sample_text.text = stringFromJNI()
 
-        chapter4_1()
+        chapter4_2()
     }
+
+fun chapter4_2(){
+    val jniThread = JNIThread()
+    thread_wait.setOnClickListener {
+        jniThread.waitNativeThread()
+    }
+
+    thread_notify.setOnClickListener {
+        jniThread.notifyNativeThread()
+    }
+
+    sample_text.setOnClickListener {
+        jniThread.startProductAndConsumerThread()
+    }
+}
 
     fun chapter4_1(){
         val jniThread = JNIThread();

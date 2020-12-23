@@ -178,3 +178,30 @@ int pthread_join(pthread_t __pthread, void** __return_value_ptr);
 ```
 
 当前线程等待__pthread 线程执行完成后才继续执行，通过__return_value_ptr 获取__pthread 「线程执行函数」的返回值。
+### 4-2 JNI 线程的同步
+（对应代码：src/main/cpp/thread/jni_wait_notify.cpp）
+* pthread_mutex_t 互斥锁
+* pthread_cond_t 条件变量
+
+加锁：pthread_mutex_lock(&mutex);
+
+解锁：pthread_mutex_unlock(&mutex);
+
+线程等待：pthread_cond_wait(&cond, &mutex);
+
+线程唤醒：pthread_cond_signal(&cond);
+
+加锁、解锁必须成对使用，避免死锁。
+加锁后使线程等待，直接解锁会导致`Waiting for a blocking GC ProfileSaver`，请唤醒线程后再解锁。
+
+当在另外一个加锁的线程中唤醒等待中的线程，必须等当前线程解锁后才会通知唤醒操作。
+
+#### 实践案例
+使用以上线程相关概念，实现一个简单的生产者消费者模型。（对应代码：src/main/cpp/thread/jni_product_and_consumer.cpp）
+创建一个生产者线程负责生产商品，创建一个消费者线程负责消费商品。
+
+如果商品数量大于9，视为爆仓不再生产商品。
+
+每秒生产一个商品，每9秒消耗一个商品。
+
+为了不爆仓，商品数量等于9时挂起生产者线程，等待消耗商品后通知生产者继续生产。（为了方便观察，消耗完商品后再唤醒生产线程继续生产商品）

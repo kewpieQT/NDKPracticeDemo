@@ -1,7 +1,7 @@
 package com.kewpie.nativepractice.jni;
 
 public class JNIThread {
-    static{
+    static {
         System.loadLibrary("native-lib");
     }
 
@@ -10,4 +10,10 @@ public class JNIThread {
     public native void createNativeThreadWithArgs();
 
     public native void joinNativeThread();
+
+    public native void waitNativeThread();
+
+    public native void notifyNativeThread();
+
+    public native void startProductAndConsumerThread();
 }
