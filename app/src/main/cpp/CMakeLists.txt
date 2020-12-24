@@ -25,8 +25,9 @@ aux_source_directory(. SOURCE_FILES)
 aux_source_directory(./jni JNI_SOURCE_FILES)
 aux_source_directory(./base BASE_SOURCE_FILES)
 aux_source_directory(./thread THREAD_SOURCE_FILES)
+aux_source_directory(./bitmap BITMAP_SOURCE_FILES)
 
-list(APPEND SOURCE_FILES ${JNI_SOURCE_FILES} ${BASE_SOURCE_FILES} ${THREAD_SOURCE_FILES})
+list(APPEND SOURCE_FILES ${JNI_SOURCE_FILES} ${BASE_SOURCE_FILES} ${THREAD_SOURCE_FILES} ${BITMAP_SOURCE_FILES})
 
 add_library( # Sets the name of the library.
         native-lib
@@ -62,6 +63,7 @@ target_link_libraries( # Specifies the target library.
         native-lib
         # Links the target library to the log library
         # included in the NDK.
+        jnigraphics
         people-lib
         ${log-lib})
 

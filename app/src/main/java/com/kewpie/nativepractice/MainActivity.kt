@@ -1,13 +1,13 @@
 package com.kewpie.nativepractice
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.kewpie.nativepractice.base.Animal
 import com.kewpie.nativepractice.jni.*
-import com.kewpie.nativepractice.load.JNIDynamicLoad
 import com.kewpie.nativepractice.utils.LogUtil
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.IllegalArgumentException
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,25 +17,36 @@ class MainActivity : AppCompatActivity() {
         // Example of a call to a native method
 //        sample_text.text = stringFromJNI()
 
-        chapter4_2()
+        chapter4_3()
     }
 
-fun chapter4_2(){
-    val jniThread = JNIThread()
-    thread_wait.setOnClickListener {
-        jniThread.waitNativeThread()
+    fun chapter4_3() {
+        var bitmap = BitmapFactory.decodeResource(resources, R.drawable.logo)
+        val jniBitmap = JNIBitmap()
+        imageView.setImageBitmap(bitmap)
+
+        imageView.setOnClickListener {
+            bitmap = jniBitmap.callNativeMirrorBitmap(bitmap)
+            imageView.setImageBitmap(bitmap)
+        }
     }
 
-    thread_notify.setOnClickListener {
-        jniThread.notifyNativeThread()
+    fun chapter4_2() {
+        val jniThread = JNIThread()
+        thread_wait.setOnClickListener {
+            jniThread.waitNativeThread()
+        }
+
+        thread_notify.setOnClickListener {
+            jniThread.notifyNativeThread()
+        }
+
+        sample_text.setOnClickListener {
+            jniThread.startProductAndConsumerThread()
+        }
     }
 
-    sample_text.setOnClickListener {
-        jniThread.startProductAndConsumerThread()
-    }
-}
-
-    fun chapter4_1(){
+    fun chapter4_1() {
         val jniThread = JNIThread();
 
         sample_text.setOnClickListener {
@@ -45,55 +56,55 @@ fun chapter4_2(){
         }
     }
 
-    fun chapter3_2(){
+    fun chapter3_2() {
         val jniException = JNIException();
         sample_text.setOnClickListener {
             try {
                 jniException.nativeThrowException()
-            }catch (e:IllegalArgumentException){
-                LogUtil.e(e.message?:"");
+            } catch (e: IllegalArgumentException) {
+                LogUtil.e(e.message ?: "");
             }
 
             jniException.nativeInvokeJavaException()
         }
     }
 
-    fun chapter3_1(){
+    fun chapter3_1() {
         val jniReference = JNIReference();
         sample_text.setOnClickListener {
             LogUtil.i(jniReference.errorCacheLocalReference())
 
-            LogUtil.i( jniReference.cacheWithGlobalReference())
+            LogUtil.i(jniReference.cacheWithGlobalReference())
 
             jniReference.useWeakGlobalReference()
         }
     }
 
-    fun chapter2_9(){
+    fun chapter2_9() {
         val jniConstructorClass = JNIConstructorClass();
         sample_text.setOnClickListener {
-          var animal =  jniConstructorClass.invokeAnimalConstructors()
-            LogUtil.i("invoke animal name is "+animal.name)
+            var animal = jniConstructorClass.invokeAnimalConstructors()
+            LogUtil.i("invoke animal name is " + animal.name)
 
-           var allocAnimal =  jniConstructorClass.allocObjectConstructor()
-            LogUtil.i("alloc animal name is "+allocAnimal.name)
+            var allocAnimal = jniConstructorClass.allocObjectConstructor()
+            LogUtil.i("alloc animal name is " + allocAnimal.name)
         }
     }
 
-    fun chapter2_8(){
+    fun chapter2_8() {
         val jniInvokeMethod = JNIInvokeMethod();
         sample_text.setOnClickListener {
             jniInvokeMethod.nativeCallback {
-                LogUtil.i("thread name is "+ Thread.currentThread().name)
+                LogUtil.i("thread name is " + Thread.currentThread().name)
             }
 
             jniInvokeMethod.nativeThreadCallback {
-                LogUtil.i("thread name is "+Thread.currentThread().name)
+                LogUtil.i("thread name is " + Thread.currentThread().name)
             }
         }
     }
 
-    fun chapter2_7(){
+    fun chapter2_7() {
         val animal = Animal("dog")
         val jniAccessMethod = JNIAccessMethod()
         sample_text.setOnClickListener {
@@ -113,7 +124,7 @@ fun chapter4_2(){
 
             LogUtil.i("name is " + animal.name)
             LogUtil.i("num is " + Animal.num)
-            LogUtil.i("static num is "+JNIAccessField.num)
+            LogUtil.i("static num is " + JNIAccessField.num)
         }
     }
 
