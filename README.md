@@ -272,4 +272,4 @@ Java_com_kewpie_nativepractice_jni_JNIBitmap_callNativeMirrorBitmap(JNIEnv *env,
     delete[] mirrorBitmapPixels;
     return newBitmap;
 }
-``` 
+```
